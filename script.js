@@ -34,3 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+gsap.to(".aboutImage", {
+    y: -100, // horizontal shift (make smaller for more subtle effect, e.g. 20)
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".aboutImgWrap",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+    }
+});

@@ -1,7 +1,15 @@
 body {
     margin: 0;
     font-family: Gabarito;
-    background: #201110;
+    background: #241614;
+}
+
+h1 {
+    color: #beba9b;
+    font-size: 3.052vw;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 h2 {
@@ -10,11 +18,11 @@ h2 {
 
 .logo {
     position: absolute;
-    width: 350px;
-    height: 250px;
+    width: 12vw;
+    height: auto;
     z-index: 2;
     margin-top: 25px;
-    margin-left: 50px;
+    margin-left: 10vw;
 }
 
 .logo img {
@@ -40,7 +48,7 @@ h2 {
     mask-repeat: no-repeat;
     mask-size: cover;
     will-change: mask-image;
-    background: #170e0d;
+    background: #241614;
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -56,8 +64,88 @@ h2 {
     object-position: center;
 }
 
-.content {
-    height: 200vh;
-    padding: 2rem;
-    background: #170e0d;
+.aboutWrapper {
+    display: grid;
+    grid-template-rows: 2;
+    grid-template-columns: 1fr 1.5fr;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: auto;
+    background: #241614;
+    margin-top: 50px;
+}
+
+.aboutHead {
+    display: block;
+    position: sticky;
+    top: 30%;
+    bottom: 40%;
+    grid-column: 1;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-top: 0;
+    margin-right: 100px;
+}
+
+.aboutText {
+    grid-column: 2;
+    grid-row: 1;
+    color: #beba9b;
+    width: 100%;
+    font-size: 1.25vw;
+    font-weight: 100;
+}
+
+.aboutImgWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 2;
+    width: 50vw;
+    height: 30vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.aboutImage {
+    display: block;
+    width: 120%;
+    top: 10%;
+    height: auto;
+    position: relative;
+    object-fit: cover;
+    will-change: transform;
+}
+
+.story {
+    background-color: #beba9b;
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 100px;
+}
+
+.storyImgWrap {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.storyImage {
+    height: 100%;
+    position: relative;
+    object-fit: cover;
+}
+
+.storyText {
+    color: #241614;
+    font-size: 1.25vw;
+    font-weight: 200;
+    width: 80%;
+    margin-left: 50px;
+    position: sticky;
+    top: 30%;
 }

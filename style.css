@@ -14,6 +14,8 @@ h1 {
 
 h2 {
     color: #beba9b;
+    font-size: 2.441vw;
+    font-weight: 600;
 }
 
 .logo {
@@ -122,22 +124,38 @@ h2 {
 .story {
     background-color: #beba9b;
     display: grid;
-    grid-column: 2;
-    grid-row: 2;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2;
     margin-top: 100px;
+    height: 100vh;
 }
 
 .storyImgWrap {
     height: 100%;
     overflow: hidden;
     position: relative;
+    grid-column: 1;
+    grid-row: 1/3;
+    background-image: url("korytarz.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .storyImage {
     height: 100%;
     position: relative;
     object-fit: cover;
+    display: none;
+}
+
+.storyHead {
+    grid-column: 2;
+    grid-row: 1;
+    color: #241614;
+    height: 10%;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .storyText {
@@ -146,6 +164,6 @@ h2 {
     font-weight: 200;
     width: 80%;
     margin-left: 50px;
-    position: sticky;
-    top: 30%;
+    grid-column: 2;
+    grid-row: 2;
 }

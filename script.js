@@ -35,8 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+gsap.to(".marqueehero__inner", {
+    xPercent: -50,
+    repeat: -1,
+    duration: 40,
+    ease: "linear",
+});
+
 gsap.to(".aboutImage", {
-    y: -100, // horizontal shift (make smaller for more subtle effect, e.g. 20)
+    y: "40%",
     ease: "none",
     scrollTrigger: {
         trigger: ".aboutImgWrap",

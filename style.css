@@ -140,7 +140,7 @@ h2 {
 
     .marqueehero__inner span {
         padding: 0.1rem;
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 500;
     }
 
@@ -169,7 +169,7 @@ h2 {
     .aboutHead h1 {
         font-size: 3.25rem;
         text-align: center;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     .aboutHead p {
@@ -242,6 +242,7 @@ h2 {
         margin-bottom: 20px;
         margin-top: 50px;
         text-align: center;
+        line-height: 1.3;
     }
 
     .storyHead h2 {
@@ -284,7 +285,7 @@ h2 {
 
     .offerHead h2 {
         text-align: center;
-        font-size: calc(40px + 8 * ((100vw - 320px) / 680));
+        font-size: 1.5rem;
         margin-top: -35px;
         font-weight: 500;
         line-height: 1.25;
@@ -305,7 +306,7 @@ h2 {
         grid-row: 3;
         color: #beba9b;
         width: 100%;
-        font-size: calc(12px + 4 * ((100vw - 320px) / 680));
+        font-size: 0.6rem;
         font-weight: 200;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -438,7 +439,7 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 2rem;
+        font-size: 1.2rem;
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -456,9 +457,9 @@ h2 {
     }
 
     .inviteLogo {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        width: 30vw;
+        margin-top: 70px;
+        margin-bottom: 70px;
+        width: 100px;
         height: auto;
         z-index: 6;
 
@@ -786,7 +787,7 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 3vw;
+        font-size: 2.5rem;
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -798,13 +799,15 @@ h2 {
         background-color: #beba9b;
         padding-top: 5%;
         padding-bottom: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
         opacity: 0;
     }
 
     .inviteLogo {
         margin-top: 50px;
         margin-bottom: 100px;
-        width: 15vw;
+        width: 200px;
         height: auto;
         z-index: 6;
 

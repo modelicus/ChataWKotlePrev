@@ -175,7 +175,7 @@ h2 {
     .aboutHead p {
         color: #beba9b;
         font-size: 1rem;
-        font-weight: 200;
+        font-weight: 400;
         text-align: center;
         margin-top: 15px;
         margin-bottom: 50px;
@@ -252,7 +252,7 @@ h2 {
     .storyText {
         color: #241614;
         font-size: 0.8rem;
-        font-weight: 200;
+        font-weight: 300;
         width: 80%;
         margin-left: auto;
         margin-right: auto;
@@ -296,8 +296,8 @@ h2 {
         margin-top: -15px;
         margin-bottom: 30px;
         text-align: left;
-        font-size: calc(12px + 4 * ((100vw - 320px) / 680));
-        font-weight: 200;
+        font-size: 0.8rem;
+        font-weight: 400;
         text-align: center;
     }
 

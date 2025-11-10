@@ -93,7 +93,7 @@ h2 {
 
 
 #videoContainer {
-    height: 250vh;
+    height: 200vh;
     margin-top: 100px;
 }
 
@@ -125,47 +125,13 @@ h2 {
     object-fit: cover;
 }
 */
-#invite {
-    display: flex;
-    flex-direction: column;
-    z-index: 5;
-    color: #241614;
-    font-size: 3vw;
-    font-weight: 500;
-    /* font-family: "Grenze Gotisch", serif; */
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #beba9b;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    opacity: 0;
-}
 
-.inviteLogo {
-    margin-top: 50px;
-    margin-bottom: 100px;
-    width: 15vw;
-    height: auto;
-    z-index: 6;
-
-}
-
-.inviteLogo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
 
 @media only screen and (max-width: 575px) and (orientation: portrait) {
 
     .logo {
         position: absolute;
-        width: 100px;
+        width: 80px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
@@ -203,6 +169,7 @@ h2 {
     .aboutHead h1 {
         font-size: 3.25rem;
         text-align: center;
+        line-height: 1.2;
     }
 
     .aboutHead p {
@@ -210,7 +177,7 @@ h2 {
         font-size: 1rem;
         font-weight: 200;
         text-align: center;
-        margin-top: -10px;
+        margin-top: 15px;
         margin-bottom: 50px;
     }
 
@@ -269,7 +236,9 @@ h2 {
         grid-column: 1;
         grid-row: 1;
         color: #241614;
-        margin-left: 50px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 20px;
         margin-top: 50px;
         text-align: center;
@@ -284,7 +253,8 @@ h2 {
         font-size: 0.8rem;
         font-weight: 200;
         width: 80%;
-        margin-left: 50px;
+        margin-left: auto;
+        margin-right: auto;
         grid-column: 1;
         grid-row: 2;
         align-self: start;
@@ -462,13 +432,52 @@ h2 {
         object-fit: cover;
         will-change: transform;
     }
+
+    #invite {
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+        color: #241614;
+        font-size: 2rem;
+        font-weight: 500;
+        /* font-family: "Grenze Gotisch", serif; */
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #beba9b;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
+        opacity: 0;
+    }
+
+    .inviteLogo {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        width: 30vw;
+        height: auto;
+        z-index: 6;
+
+    }
+
+    .inviteLogo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 
     .logo {
         position: absolute;
-        width: 130px;
+        width: 100px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
@@ -477,7 +486,7 @@ h2 {
 
     .marqueehero__inner span {
         padding: 0.1rem;
-        font-size: 4vw;
+        font-size: 2.5rem;
         font-weight: 500;
     }
 
@@ -572,9 +581,11 @@ h2 {
         grid-column: 1;
         grid-row: 1;
         color: #241614;
-        margin-left: 50px;
         margin-bottom: 20px;
         margin-top: 50px;
+        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
     }
 
@@ -587,11 +598,12 @@ h2 {
         font-size: 1rem;
         font-weight: 200;
         width: 80%;
-        margin-left: 50px;
         grid-column: 1;
         grid-row: 2;
         align-self: start;
         margin-bottom: 80px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .offerWrapper {
@@ -768,13 +780,50 @@ h2 {
         object-fit: cover;
         will-change: transform;
     }
+
+    #invite {
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+        color: #241614;
+        font-size: 3vw;
+        font-weight: 500;
+        /* font-family: "Grenze Gotisch", serif; */
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #beba9b;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        opacity: 0;
+    }
+
+    .inviteLogo {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        width: 15vw;
+        height: auto;
+        z-index: 6;
+
+    }
+
+    .inviteLogo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
     .logo {
         position: absolute;
-        width: 150px;
+        width: 130px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
@@ -866,7 +915,6 @@ h2 {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-
     }
 
     .storyImage {
@@ -880,7 +928,6 @@ h2 {
         grid-column: 1;
         grid-row: 1;
         color: #241614;
-        margin-left: 50px;
         margin-bottom: 20px;
         margin-top: 50px;
         text-align: center;
@@ -1070,6 +1117,42 @@ h2 {
         position: relative;
         object-fit: cover;
         will-change: transform;
+    }
+
+    #invite {
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+        color: #241614;
+        font-size: 3vw;
+        font-weight: 500;
+        /* font-family: "Grenze Gotisch", serif; */
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #beba9b;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        opacity: 0;
+    }
+
+    .inviteLogo {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        width: 15vw;
+        height: auto;
+        z-index: 6;
+
+    }
+
+    .inviteLogo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
     }
 }
 
@@ -1363,6 +1446,42 @@ h2 {
         object-fit: cover;
         will-change: transform;
     }
+
+    #invite {
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+        color: #241614;
+        font-size: 3vw;
+        font-weight: 500;
+        /* font-family: "Grenze Gotisch", serif; */
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #beba9b;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        opacity: 0;
+    }
+
+    .inviteLogo {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        width: 15vw;
+        height: auto;
+        z-index: 6;
+
+    }
+
+    .inviteLogo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -1435,6 +1554,55 @@ h2 {
         overflow: hidden;
         position: relative;
         margin-top: 30px;
+    }
+
+    .story {
+        background-color: #beba9b;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2;
+        height: 100vh;
+        min-height: 45vw;
+    }
+
+    .storyImgWrap {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        grid-column: 1;
+        grid-row: 1/3;
+        background-image: url("korytarz.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .storyImage {
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        display: none;
+    }
+
+    .storyHead {
+        grid-column: 2;
+        grid-row: 1;
+        color: #241614;
+        margin-left: 50px;
+        margin-bottom: 40px;
+        align-self: end;
+    }
+
+    .storyText {
+        color: #241614;
+        font-size: 1.25vw;
+        font-weight: 200;
+        width: 80%;
+        margin-left: 50px;
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
     }
 
     .offerWrapper {
@@ -1606,6 +1774,42 @@ h2 {
         position: relative;
         object-fit: cover;
         will-change: transform;
+    }
+
+    #invite {
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+        color: #241614;
+        font-size: 3vw;
+        font-weight: 500;
+        /* font-family: "Grenze Gotisch", serif; */
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #beba9b;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        opacity: 0;
+    }
+
+    .inviteLogo {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        width: 15vw;
+        height: auto;
+        z-index: 6;
+
+    }
+
+    .inviteLogo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
     }
 
 }

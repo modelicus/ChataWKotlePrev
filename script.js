@@ -128,7 +128,7 @@ mm.add("(min-width: 768px)", () => {
 });
 
 // Mobile: normal playback when container fully in viewport
-mm.add("(max-width: 768px)", () => {
+mm.add("(max-width: 767px)", () => {
 
     // Reset video to start initially
     video.currentTime = 0;

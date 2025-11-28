@@ -811,7 +811,7 @@ h2 {
     }
 
     #videoContainer {
-        height: 100vh;
+        height: 100dvh;
         margin-top: 100px;
     }
 

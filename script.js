@@ -128,34 +128,49 @@ mm.add("(min-width: 768px)", () => {
 });
 
 // Mobile: normal playback when container fully in viewport
-mm.add("(max-width: 767px)", () => {
-    // Reset video to start
+mm.add("(max-width: 768px)", () => {
+
+    // Reset video to start initially
     video.currentTime = 0;
+
+    // Timeline for video playback
+    const videoTL = gsap.timeline({ paused: true });
+    once(video, "loadedmetadata", () => {
+        videoTL.to(video, {
+            currentTime: video.duration,
+            duration: 0.9,      // length of forward animation
+            ease: "none"
+        });
+    });
+
+    // Timeline for #invite opacity
+    const inviteTL = gsap.timeline({ paused: true })
+        .to("#invite", {
+            opacity: 0.8,
+            duration: 2,
+            ease: "power2.out"
+        });
 
     ScrollTrigger.create({
         trigger: "#videoContainer",
         start: "top top",
+        end: "bottom top",
+
         onEnter: () => {
-            video.playbackRate = 2;
             video.play();
 
-            // Fade #invite with normal animation (no scroll)
-            gsap.to("#invite", {
-                opacity: 0.8,
-                duration: 2.3,
-                ease: "power2.out"
-            });
+            videoTL.play();
+            inviteTL.play();
         },
-        onLeaveBack: () => {
-            // Scroll back up past the container
-            video.pause();
-            video.currentTime = 0;
 
-            gsap.to("#invite", {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.out"
-            });
-        },
+        onLeaveBack: () => {
+            video.pause();
+
+            // Reverse video and opacity smoothly
+            videoTL.reverse();
+            inviteTL.reverse();
+        }
     });
 });
+
+

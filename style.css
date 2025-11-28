@@ -810,7 +810,7 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 2.5rem;
+        font-size: min(2.5rem, 5vh);
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -828,12 +828,12 @@ h2 {
     }
 
     .inviteLogo {
-        margin-top: 50px;
-        margin-bottom: 100px;
+        margin-top: 5vh;
+        margin-bottom: 10vh;
         width: 200px;
+        max-width: 25vh;
         height: auto;
         z-index: 6;
-
     }
 
     .inviteLogo img {
@@ -1162,7 +1162,7 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 3vw;
+        font-size: min(3vw, 5vh);
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -1178,9 +1178,10 @@ h2 {
     }
 
     .inviteLogo {
-        margin-top: 50px;
-        margin-bottom: 100px;
+        margin-top: 5vh;
+        margin-bottom: 10vh;
         width: 15vw;
+        max-width: 25vh;
         height: auto;
         z-index: 6;
 
@@ -1502,7 +1503,7 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 3vw;
+        font-size: min(3vw, 5vh);
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -1831,7 +1832,8 @@ h2 {
         flex-direction: column;
         z-index: 5;
         color: #241614;
-        font-size: 3vw;
+        font-size: min(3vw, 5vh);
+
         font-weight: 500;
         /* font-family: "Grenze Gotisch", serif; */
         position: absolute;
@@ -1850,6 +1852,7 @@ h2 {
         margin-top: 50px;
         margin-bottom: 100px;
         width: 15vw;
+        max-width: 25vh;
         height: auto;
         z-index: 6;
 

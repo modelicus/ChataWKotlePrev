@@ -70,13 +70,14 @@ gsap.to(".offerImage", {
     }
 });
 
+gsap.registerPlugin(ScrollTrigger);
+
 const video = document.querySelector("#video-background video");
 let src = video.currentSrc || video.src;
-console.log(video, src);
 
-/* Make sure the video is 'activated' on iOS */
+// iOS touchstart hack to activate video
 function once(el, event, fn, opts) {
-    var onceFn = function (e) {
+    const onceFn = function (e) {
         el.removeEventListener(event, onceFn);
         fn.apply(this, arguments);
     };
@@ -84,66 +85,77 @@ function once(el, event, fn, opts) {
     return onceFn;
 }
 
-once(document.documentElement, "touchstart", function (e) {
+once(document.documentElement, "touchstart", () => {
     video.play();
     video.pause();
 });
 
-/* ---------------------------------- */
-/* Scroll Control! */
+// Use matchMedia for responsive behavior
+const mm = gsap.matchMedia();
 
-gsap.registerPlugin(ScrollTrigger);
+// Desktop: scroll-controlled playback
+mm.add("(min-width: 768px)", () => {
+    let tl = gsap.timeline({
+        defaults: { duration: 1 },
+        scrollTrigger: {
+            trigger: "#videoContainer",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true
+        }
+    });
 
-let tl = gsap.timeline({
-    defaults: { duration: 1 },
-    scrollTrigger: {
+    once(video, "loadedmetadata", () => {
+        tl.fromTo(
+            video,
+            { currentTime: 0 },
+            { currentTime: video.duration || 1 }
+        );
+    });
+
+    // Desktop scroll-based fade
+    gsap.to("#invite", {
+        opacity: 0.8,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#videoContainer",
+            start: "top -20%",
+            end: "bottom bottom",
+            scrub: true
+        }
+    });
+});
+
+// Mobile: normal playback when container fully in viewport
+mm.add("(max-width: 767px)", () => {
+    // Reset video to start
+    video.currentTime = 0;
+
+    ScrollTrigger.create({
         trigger: "#videoContainer",
         start: "top top",
-        end: "bottom bottom",
-        scrub: true
-    }
-});
+        onEnter: () => {
+            video.playbackRate = 2;
+            video.play();
 
-once(video, "loadedmetadata", () => {
-    tl.fromTo(
-        video,
-        {
-            currentTime: 0
-        },
-        {
-            currentTime: video.duration || 1
-        }
-    );
-});
-
-/* When first coded, the Blobbing was important to ensure the browser wasn't dropping previously played segments, but it doesn't seem to be a problem now. Possibly based on memory availability? */
-setTimeout(function () {
-    if (window["fetch"]) {
-        fetch(src)
-            .then((response) => response.blob())
-            .then((response) => {
-                var blobURL = URL.createObjectURL(response);
-
-                var t = video.currentTime;
-                once(document.documentElement, "touchstart", function (e) {
-                    video.play();
-                    video.pause();
-                });
-
-                video.setAttribute("src", blobURL);
-                video.currentTime = t + 0.01;
+            // Fade #invite with normal animation (no scroll)
+            gsap.to("#invite", {
+                opacity: 0.8,
+                duration: 2.3,
+                ease: "power2.out"
             });
-    }
-}, 1000);
+        },
+        onLeaveBack: () => {
+            // Scroll back up past the container
+            video.pause();
+            video.currentTime = 0;
 
-gsap.to("#invite", {
-    opacity: 0.8,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-        trigger: "#videoContainer",
-        start: "top -20%",
-        end: "bottom bottom",
-        scrub: true
-    }
+            gsap.to("#invite", {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        },
+    });
 });

@@ -72,8 +72,11 @@ gsap.to(".offerImage", {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const video = document.querySelector("#video-background video");
-let src = video.currentSrc || video.src;
+const videoFWD = document.querySelector(".doorVideoFWD");
+const videoRR = document.querySelector(".doorVideoRR");
+let src = videoFWD.currentSrc || videoFWD.src;
+let FwdPlayNeg;
+let RrPlayNeg;
 
 // iOS touchstart hack to activate video
 function once(el, event, fn, opts) {
@@ -86,62 +89,69 @@ function once(el, event, fn, opts) {
 }
 
 once(document.documentElement, "touchstart", () => {
-    video.play();
-    video.pause();
+    videoFWD.play();
+    videoFWD.pause();
+});
+
+once(document.documentElement, "touchstart", () => {
+    videoRR.play();
+    videoRR.pause();
 });
 
 // Use matchMedia for responsive behavior
 const mm = gsap.matchMedia();
 
 // Desktop: scroll-controlled playback
-mm.add("(min-width: 768px)", () => {
-    let tl = gsap.timeline({
-        defaults: { duration: 1 },
-        scrollTrigger: {
-            trigger: "#videoContainer",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true
-        }
-    });
+// mm.add("(min-width: 768px)", () => {
+//     let tl = gsap.timeline({
+//         defaults: { duration: 1 },
+//         scrollTrigger: {
+//             trigger: "#videoContainer",
+//             start: "top top",
+//             end: "bottom bottom",
+//             scrub: true
+//         }
+//     });
 
-    once(video, "loadedmetadata", () => {
-        tl.fromTo(
-            video,
-            { currentTime: 0 },
-            { currentTime: video.duration || 1 }
-        );
-    });
+//     once(video, "loadedmetadata", () => {
+//         tl.fromTo(
+//             video,
+//             { currentTime: 0 },
+//             { currentTime: video.duration || 1 }
+//         );
+//     });
 
-    // Desktop scroll-based fade
-    gsap.to("#invite", {
-        opacity: 0.8,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#videoContainer",
-            start: "top -20%",
-            end: "bottom bottom",
-            scrub: true
-        }
-    });
-});
+//     // Desktop scroll-based fade
+//     gsap.to("#invite", {
+//         opacity: 0.8,
+//         duration: 1,
+//         ease: "power2.out",
+//         scrollTrigger: {
+//             trigger: "#videoContainer",
+//             start: "top -20%",
+//             end: "bottom bottom",
+//             scrub: true
+//         }
+//     });
+// });
 
 // Mobile: normal playback when container fully in viewport
-mm.add("(max-width: 767px)", () => {
+mm.add("(max-width: 4767px)", () => {
 
     // Reset video to start initially
-    video.currentTime = 0;
+    videoFWD.currentTime = 0;
+    videoRR.currentTime = 2.002;
+    videoRR.style.display = "none";
 
-    // Timeline for video playback
-    const videoTL = gsap.timeline({ paused: true });
-    once(video, "loadedmetadata", () => {
-        videoTL.to(video, {
-            currentTime: video.duration,
-            duration: 0.9,      // length of forward animation
-            ease: "none"
-        });
-    });
+    // // Timeline for video playback
+    // const videoTL = gsap.timeline({ paused: true });
+    // once(videoFWD, "loadedmetadata", () => {
+    //     videoTL.to(video, {
+    //         currentTime: videoFWD.duration,
+    //         // duration: video.duration,      // length of forward animation
+    //         ease: "none"
+    //     });
+    // });
 
     // Timeline for #invite opacity
     const inviteTL = gsap.timeline({ paused: true })
@@ -155,19 +165,36 @@ mm.add("(max-width: 767px)", () => {
         trigger: "#videoContainer",
         start: "top top",
         end: "bottom top",
+        // onUpdate: (self) => {
+        //     console.log(self.progress);
+        //     video.currentTime = video.duration * self.progress; // Update video progress based on scroll
+        // },
+
 
         onEnter: () => {
-            video.play();
-
-            videoTL.play();
+            videoRR.pause();
+            RrPlayNeg = videoRR.duration - videoRR.currentTime;
+            videoFWD.currentTime = RrPlayNeg;
+            videoFWD.play();
+            videoFWD.style.display = "";
+            videoRR.style.display = "none";
+            console.log("onEnterFWD", videoFWD.currentTime)
+            console.log("onEnterRR", videoRR.currentTime)
+            // videoTL.play();
             inviteTL.play();
         },
 
         onLeaveBack: () => {
-            video.pause();
-
-            // Reverse video and opacity smoothly
-            videoTL.reverse();
+            videoFWD.pause();
+            FwdPlayNeg = videoFWD.duration - videoFWD.currentTime;
+            videoRR.currentTime = FwdPlayNeg;
+            videoRR.play();
+            videoFWD.style.display = "none";
+            videoRR.style.display = "";
+            console.log("onLeaveFWD", videoFWD.currentTime)
+            console.log("onLeaveRR", videoRR.currentTime)
+            //     // Reverse video and opacity smoothly
+            //     videoTL.reverse();
             inviteTL.reverse();
         }
     });

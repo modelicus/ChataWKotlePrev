@@ -105,7 +105,7 @@ h2 {
     overflow: hidden;
 }
 
-.doorVideo {
+.doorVideoFWD {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -117,7 +117,22 @@ h2 {
     min-width: 100%;
     min-height: 56.25vw;
     /* 100 * 9 / 16 */
+    /* display: none; */
+}
 
+.doorVideoRR {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    height: 100%;
+    width: 177.77777778vh;
+    /* 100 * 16 / 9 */
+    min-width: 100%;
+    min-height: 56.25vw;
+    /* 100 * 9 / 16 */
+    /* display: none; */
 }
 
 /*
@@ -447,9 +462,10 @@ h2 {
     }
 
     #videoContainer {
-        height: 100dvh;
+        height: 102dvh;
         margin-top: 100px;
     }
+
 
     #invite {
         display: flex;

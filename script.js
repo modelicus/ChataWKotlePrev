@@ -94,16 +94,14 @@ const mm = gsap.matchMedia();
 
 function setCanvasResolution() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
     const rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
 
-    // CSS size drives layout (CLS-safe)
     canvas.width = Math.round(rect.width * dpr);
     canvas.height = Math.round(rect.height * dpr);
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-
 
 /* ============================================================
    IMAGE LOADING
@@ -120,6 +118,7 @@ function frameSrc(basePath, index) {
 function loadFrame(basePath, index) {
     return new Promise(resolve => {
         const img = new Image();
+        img.decoding = "async";
         img.src = frameSrc(basePath, index);
         img.onload = () => resolve(img);
     });
@@ -128,11 +127,9 @@ function loadFrame(basePath, index) {
 async function loadFramesInChunks(basePath, chunkSize = 5) {
     for (let i = 1; i < frameCount; i += chunkSize) {
         const chunk = [];
-
         for (let j = i; j < i + chunkSize && j < frameCount; j++) {
             chunk.push(loadFrame(basePath, j).then(img => images[j] = img));
         }
-
         await Promise.all(chunk);
         await new Promise(r => idle(r));
     }
@@ -165,7 +162,6 @@ function render() {
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 }
 
-
 /* ============================================================
    INIT SEQUENCE
 ============================================================ */
@@ -173,11 +169,13 @@ function render() {
 function initSequence(basePath) {
     setCanvasResolution();
 
+    // Load first frame immediately
     loadFrame(basePath, 0).then(img => {
         images[0] = img;
         render();
     });
 
+    // Lazy-load remaining frames when container is visible
     const io = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
             loadFramesInChunks(basePath);
@@ -189,7 +187,7 @@ function initSequence(basePath) {
 }
 
 /* ============================================================
-   RESET (USED ON ORIENTATION CHANGE)
+   RESET SEQUENCE
 ============================================================ */
 
 function resetSequence() {
@@ -204,76 +202,77 @@ function resetSequence() {
 }
 
 /* ============================================================
-   DESKTOP: SCROLL SCRUB
+   MATCH MEDIA SEQUENCES
 ============================================================ */
 
-mm.add("(min-width: 769px)", () => {
-    initSequence(desktopPath);
+function initSequences() {
+    mm.add("(min-width: 769px)", () => {
+        initSequence(desktopPath);
 
-    gsap.to(playhead, {
-        frame: frameCount - 1,
-        snap: "frame",
-        ease: "none",
-        scrollTrigger: {
+        gsap.to(playhead, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: "none",
+            scrollTrigger: {
+                trigger: container,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+            },
+            onUpdate: render
+        });
+
+        gsap.to("#invite", {
+            opacity: 0.8,
+            scrollTrigger: {
+                trigger: container,
+                start: "top -20%",
+                end: "bottom bottom",
+                scrub: true
+            }
+        });
+    });
+
+    mm.add("(max-width: 768px)", () => {
+        initSequence(mobilePath);
+
+        const sequence = gsap.to(playhead, {
+            frame: frameCount - 1,
+            duration: 1.2,
+            snap: "frame",
+            ease: "power1.inOut",
+            paused: true,
+            onUpdate: render
+        });
+
+        const invite = gsap.to("#invite", {
+            opacity: 0.8,
+            duration: 0.6,
+            ease: "power2.out",
+            paused: true
+        });
+
+        ScrollTrigger.create({
             trigger: container,
             start: "top top",
             end: "bottom bottom",
-            scrub: true
-        },
-        onUpdate: render
+            onEnter: () => {
+                sequence.play();
+                invite.play();
+            },
+            onLeaveBack: () => {
+                sequence.reverse();
+                invite.reverse();
+            }
+        });
     });
-
-    gsap.to("#invite", {
-        opacity: 0.8,
-        scrollTrigger: {
-            trigger: container,
-            start: "top -20%",
-            end: "bottom bottom",
-            scrub: true
-        }
-    });
-});
+}
 
 /* ============================================================
-   MOBILE: AUTO PLAY / REVERSE
+   INITIALIZE
 ============================================================ */
 
-mm.add("(max-width: 768px)", () => {
-    initSequence(mobilePath);
-
-    const sequence = gsap.to(playhead, {
-        frame: frameCount - 1,
-        duration: 1.2,
-        snap: "frame",
-        ease: "power1.inOut",
-        paused: true,
-        onUpdate: render
-    });
-
-    const invite = gsap.to("#invite", {
-        opacity: 0.8,
-        duration: 0.6,
-        ease: "power2.out",
-        paused: true
-    });
-
-    ScrollTrigger.create({
-        trigger: container,
-        start: "top top",
-        end: "bottom bottom",
-
-        onEnter: () => {
-            sequence.play();
-            invite.play();
-        },
-
-        onLeaveBack: () => {
-            sequence.reverse();
-            invite.reverse();
-        }
-    });
-
-});
+initSequences();
 
 /* ============================================================
    ORIENTATION / RESIZE HANDLING
@@ -282,20 +281,20 @@ mm.add("(max-width: 768px)", () => {
 let resizeTimeout;
 let lastWidth = window.innerWidth;
 
-window.addEventListener("orientationchange", () => {
+function handleResize() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
         resetSequence();
         mm.revert();
+        initSequences();
         ScrollTrigger.refresh(true);
     }, 300);
-});
+}
 
+window.addEventListener("orientationchange", handleResize);
 window.addEventListener("resize", () => {
     if (Math.abs(window.innerWidth - lastWidth) > 100) {
         lastWidth = window.innerWidth;
-        resetSequence();
-        mm.revert();
-        ScrollTrigger.refresh(true);
+        handleResize();
     }
 });

@@ -70,134 +70,217 @@ gsap.to(".offerImage", {
     }
 });
 
-gsap.registerPlugin(ScrollTrigger);
+/* ============================================================
+   IMAGE SEQUENCE CONFIG
+============================================================ */
 
-const videoFWD = document.querySelector(".doorVideoFWD");
-const videoRR = document.querySelector(".doorVideoRR");
-let src = videoFWD.currentSrc || videoFWD.src;
-let FwdPlayNeg;
-let RrPlayNeg;
+const frameCount = 48;
 
-// iOS touchstart hack to activate video
-function once(el, event, fn, opts) {
-    const onceFn = function (e) {
-        el.removeEventListener(event, onceFn);
-        fn.apply(this, arguments);
-    };
-    el.addEventListener(event, onceFn, opts);
-    return onceFn;
-}
+const desktopPath = "/assets/frames/desktop/";
+const mobilePath = "/assets/frames/mobile/";
 
-once(document.documentElement, "touchstart", () => {
-    videoFWD.play();
-    videoFWD.pause();
-});
+const canvas = document.getElementById("doorSequence");
+const ctx = canvas.getContext("2d");
+const container = document.getElementById("videoContainer");
 
-once(document.documentElement, "touchstart", () => {
-    videoRR.play();
-    videoRR.pause();
-});
+const images = new Array(frameCount);
+const playhead = { frame: 0 };
 
-// Use matchMedia for responsive behavior
 const mm = gsap.matchMedia();
 
-// Desktop: scroll-controlled playback
-// mm.add("(min-width: 768px)", () => {
-//     let tl = gsap.timeline({
-//         defaults: { duration: 1 },
-//         scrollTrigger: {
-//             trigger: "#videoContainer",
-//             start: "top top",
-//             end: "bottom bottom",
-//             scrub: true
-//         }
-//     });
+/* ============================================================
+   CANVAS RESOLUTION (CLS SAFE)
+============================================================ */
 
-//     once(video, "loadedmetadata", () => {
-//         tl.fromTo(
-//             video,
-//             { currentTime: 0 },
-//             { currentTime: video.duration || 1 }
-//         );
-//     });
+function setCanvasResolution() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
 
-//     // Desktop scroll-based fade
-//     gsap.to("#invite", {
-//         opacity: 0.8,
-//         duration: 1,
-//         ease: "power2.out",
-//         scrollTrigger: {
-//             trigger: "#videoContainer",
-//             start: "top -20%",
-//             end: "bottom bottom",
-//             scrub: true
-//         }
-//     });
-// });
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
 
-// Mobile: normal playback when container fully in viewport
-mm.add("(max-width: 4767px)", () => {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
 
-    // Reset video to start initially
-    videoFWD.currentTime = 0;
-    videoRR.currentTime = 2.002;
-    videoRR.style.display = "none";
+/* ============================================================
+   IMAGE LOADING
+============================================================ */
 
-    // // Timeline for video playback
-    // const videoTL = gsap.timeline({ paused: true });
-    // once(videoFWD, "loadedmetadata", () => {
-    //     videoTL.to(video, {
-    //         currentTime: videoFWD.duration,
-    //         // duration: video.duration,      // length of forward animation
-    //         ease: "none"
-    //     });
-    // });
+function frameSrc(basePath, index) {
+    return `${basePath}frame_${String(index + 1).padStart(3, "0")}.webp`;
+}
 
-    // Timeline for #invite opacity
-    const inviteTL = gsap.timeline({ paused: true })
-        .to("#invite", {
-            opacity: 0.8,
-            duration: 2,
-            ease: "power2.out"
-        });
+function loadFrame(basePath, index) {
+    return new Promise(resolve => {
+        const img = new Image();
+        img.src = frameSrc(basePath, index);
+        img.onload = () => resolve(img);
+    });
+}
 
-    ScrollTrigger.create({
-        trigger: "#videoContainer",
-        start: "top top",
-        end: "bottom top",
-        // onUpdate: (self) => {
-        //     console.log(self.progress);
-        //     video.currentTime = video.duration * self.progress; // Update video progress based on scroll
-        // },
+async function loadFramesInChunks(basePath, chunkSize = 5) {
+    for (let i = 1; i < frameCount; i += chunkSize) {
+        const chunk = [];
 
+        for (let j = i; j < i + chunkSize && j < frameCount; j++) {
+            chunk.push(loadFrame(basePath, j).then(img => images[j] = img));
+        }
 
-        onEnter: () => {
-            videoRR.pause();
-            RrPlayNeg = videoRR.duration - videoRR.currentTime;
-            videoFWD.currentTime = RrPlayNeg;
-            videoFWD.play();
-            videoFWD.style.display = "";
-            videoRR.style.display = "none";
-            console.log("onEnterFWD", videoFWD.currentTime)
-            console.log("onEnterRR", videoRR.currentTime)
-            // videoTL.play();
-            inviteTL.play();
+        await Promise.all(chunk);
+        await new Promise(r => requestIdleCallback(r));
+    }
+}
+
+/* ============================================================
+   RENDER
+============================================================ */
+
+function render() {
+    const img = images[Math.round(playhead.frame)];
+    if (!img) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+}
+
+/* ============================================================
+   INIT SEQUENCE
+============================================================ */
+
+function initSequence(basePath) {
+    setCanvasResolution();
+
+    loadFrame(basePath, 0).then(img => {
+        images[0] = img;
+        render();
+    });
+
+    const io = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            loadFramesInChunks(basePath);
+            io.disconnect();
+        }
+    }, { rootMargin: "200px" });
+
+    io.observe(container);
+}
+
+/* ============================================================
+   RESET (USED ON ORIENTATION CHANGE)
+============================================================ */
+
+function resetSequence() {
+    ScrollTrigger.getAll().forEach(st => st.kill());
+    gsap.killTweensOf(playhead);
+    gsap.killTweensOf("#invite");
+
+    images.length = 0;
+    playhead.frame = 0;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+/* ============================================================
+   DESKTOP: SCROLL SCRUB
+============================================================ */
+
+mm.add("(min-width: 769px)", () => {
+    initSequence(desktopPath);
+
+    gsap.to(playhead, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+            trigger: container,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true
         },
+        onUpdate: render
+    });
 
-        onLeaveBack: () => {
-            videoFWD.pause();
-            FwdPlayNeg = videoFWD.duration - videoFWD.currentTime;
-            videoRR.currentTime = FwdPlayNeg;
-            videoRR.play();
-            videoFWD.style.display = "none";
-            videoRR.style.display = "";
-            console.log("onLeaveFWD", videoFWD.currentTime)
-            console.log("onLeaveRR", videoRR.currentTime)
-            //     // Reverse video and opacity smoothly
-            //     videoTL.reverse();
-            inviteTL.reverse();
+    gsap.to("#invite", {
+        opacity: 0.8,
+        scrollTrigger: {
+            trigger: container,
+            start: "top -20%",
+            end: "bottom bottom",
+            scrub: true
         }
     });
 });
 
+/* ============================================================
+   MOBILE: AUTO PLAY / REVERSE
+============================================================ */
 
+mm.add("(max-width: 768px)", () => {
+    initSequence(mobilePath);
+
+    const forward = gsap.to(playhead, {
+        frame: frameCount - 1,
+        duration: 1.2,
+        snap: "frame",
+        ease: "power1.out",
+        paused: true,
+        onUpdate: render
+    });
+
+    const reverse = gsap.to(playhead, {
+        frame: 0,
+        duration: 1,
+        snap: "frame",
+        ease: "power1.inOut",
+        paused: true,
+        onUpdate: render
+    });
+
+    const invite = gsap.to("#invite", {
+        opacity: 0.8,
+        duration: 0.6,
+        ease: "power2.out",
+        paused: true
+    });
+
+    ScrollTrigger.create({
+        trigger: container,
+        start: "top 70%",
+        end: "bottom top",
+        onEnter: () => {
+            reverse.pause(0);
+            forward.play(0);
+            invite.play();
+        },
+        onLeaveBack: () => {
+            forward.pause(0);
+            reverse.play(0);
+            invite.reverse();
+        }
+    });
+});
+
+/* ============================================================
+   ORIENTATION / RESIZE HANDLING
+============================================================ */
+
+let resizeTimeout;
+let lastWidth = window.innerWidth;
+
+window.addEventListener("orientationchange", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        resetSequence();
+        mm.revert();
+        ScrollTrigger.refresh(true);
+    }, 300);
+});
+
+window.addEventListener("resize", () => {
+    if (Math.abs(window.innerWidth - lastWidth) > 100) {
+        lastWidth = window.innerWidth;
+        resetSequence();
+        mm.revert();
+        ScrollTrigger.refresh(true);
+    }
+});

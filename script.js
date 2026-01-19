@@ -93,18 +93,25 @@ const mm = gsap.matchMedia();
 ============================================================ */
 
 function setCanvasResolution() {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
     const rect = canvas.getBoundingClientRect();
 
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
+    // CSS size drives layout (CLS-safe)
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+
 /* ============================================================
    IMAGE LOADING
 ============================================================ */
+
+const idle = window.requestIdleCallback
+    ? (cb) => requestIdleCallback(cb)
+    : (cb) => setTimeout(cb, 16);
 
 function frameSrc(basePath, index) {
     return `${basePath}frame_${String(index + 1).padStart(3, "0")}.webp`;
@@ -127,7 +134,7 @@ async function loadFramesInChunks(basePath, chunkSize = 5) {
         }
 
         await Promise.all(chunk);
-        await new Promise(r => requestIdleCallback(r));
+        await new Promise(r => idle(r));
     }
 }
 
@@ -139,9 +146,25 @@ function render() {
     const img = images[Math.round(playhead.frame)];
     if (!img) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const rect = canvas.getBoundingClientRect();
+    const cw = rect.width;
+    const ch = rect.height;
+
+    const iw = img.width;
+    const ih = img.height;
+
+    const scale = Math.max(cw / iw, ch / ih);
+
+    const drawWidth = iw * scale;
+    const drawHeight = ih * scale;
+
+    const offsetX = (cw - drawWidth) / 2;
+    const offsetY = (ch - drawHeight) / 2;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 }
+
 
 /* ============================================================
    INIT SEQUENCE
@@ -218,18 +241,9 @@ mm.add("(min-width: 769px)", () => {
 mm.add("(max-width: 768px)", () => {
     initSequence(mobilePath);
 
-    const forward = gsap.to(playhead, {
+    const sequence = gsap.to(playhead, {
         frame: frameCount - 1,
         duration: 1.2,
-        snap: "frame",
-        ease: "power1.out",
-        paused: true,
-        onUpdate: render
-    });
-
-    const reverse = gsap.to(playhead, {
-        frame: 0,
-        duration: 1,
         snap: "frame",
         ease: "power1.inOut",
         paused: true,
@@ -245,19 +259,20 @@ mm.add("(max-width: 768px)", () => {
 
     ScrollTrigger.create({
         trigger: container,
-        start: "top 70%",
-        end: "bottom top",
+        start: "top top",
+        end: "bottom bottom",
+
         onEnter: () => {
-            reverse.pause(0);
-            forward.play(0);
+            sequence.play();
             invite.play();
         },
+
         onLeaveBack: () => {
-            forward.pause(0);
-            reverse.play(0);
+            sequence.reverse();
             invite.reverse();
         }
     });
+
 });
 
 /* ============================================================

@@ -1,3 +1,8 @@
+html {
+    height: 100%;
+    overscroll-behavior: none;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +15,8 @@ body {
     font-weight: 600;
     background: #241614;
     line-height: 1.75;
-
+    height: 100%;
+    overscroll-behavior: none;
 }
 
 h1 {
@@ -38,7 +44,7 @@ h2 {
 
 .hero {
     position: relative;
-    height: 100dvh;
+    height: 100vh;
     width: 100%;
     overflow: hidden;
 }
@@ -107,17 +113,9 @@ h2 {
 
 #doorSequence {
     position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
+    inset: 0;
+    width: 100%;
     height: 100%;
-    width: 177.77777778vh;
-    /* 16 / 9 */
-    min-width: 100%;
-    min-height: 56.25vw;
-
     display: block;
 }
 
@@ -223,7 +221,7 @@ h2 {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-
+        bottom: 0px;
     }
 
     :root[style*="--is-ios: 1"] .storyImgWrap {
@@ -448,7 +446,7 @@ h2 {
     }
 
     #videoContainer {
-        height: 102dvh;
+        height: 102vh;
         margin-top: 100px;
     }
 
@@ -813,7 +811,7 @@ h2 {
     }
 
     #videoContainer {
-        height: 100dvh;
+        height: 100vh;
         margin-top: 100px;
     }
 
@@ -1169,10 +1167,10 @@ h2 {
         will-change: transform;
     }
 
-    #videoContainer {
+    /* #videoContainer {
         height: 200vh;
         margin-top: 100px;
-    }
+    } */
 
     #invite {
         display: flex;
@@ -1515,10 +1513,10 @@ h2 {
         will-change: transform;
     }
 
-    #videoContainer {
+    /* #videoContainer {
         height: 200vh;
         margin-top: 100px;
-    }
+    } */
 
     #invite {
         display: flex;
@@ -1849,10 +1847,10 @@ h2 {
         will-change: transform;
     }
 
-    #videoContainer {
+    /* #videoContainer {
         height: 200vh;
         margin-top: 100px;
-    }
+    } */
 
     #invite {
         display: flex;

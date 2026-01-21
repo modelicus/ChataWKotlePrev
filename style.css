@@ -22,18 +22,16 @@ body {
 h1 {
     color: #beba9b;
     font-family: "Grenze Gotisch", serif;
-    font-size: 4.5vw;
+    font-size: min(4.5vw, 7vh);
     font-weight: 400;
 }
 
 h2 {
     color: #beba9b;
     font-family: "Grenze Gotisch", serif;
-    font-size: 3vw;
+    font-size: min(3vw, 5vh);
     font-weight: 400;
 }
-
-
 
 .logo img {
     width: 100%;
@@ -1560,6 +1558,7 @@ h2 {
     .logo {
         position: absolute;
         width: 12vw;
+        max-width: 20vh;
         height: auto;
         z-index: 2;
         margin-top: 25px;
@@ -1576,7 +1575,7 @@ h2 {
         display: grid;
         grid-template-rows: auto auto;
         grid-template-columns: 1fr 1.5fr;
-        width: 80%;
+        width: 80vw;
         margin-left: auto;
         margin-right: auto;
         height: auto;
@@ -1594,13 +1593,13 @@ h2 {
         grid-column: 1;
         grid-row: 1;
         grid-row-end: 2;
-        margin-right: 2vw;
+        margin-right: 5vw;
         margin-top: -30px;
     }
 
     .aboutHead p {
         color: #beba9b;
-        font-size: 1.25vw;
+        font-size: min(1.25vw, 2vh);
         font-weight: 200;
     }
 
@@ -1609,7 +1608,7 @@ h2 {
         grid-row: 1;
         color: #beba9b;
         width: 100%;
-        font-size: 1.25vw;
+        font-size: min(1.25vw, 2vh);
         font-weight: 200;
 
     }
@@ -1621,7 +1620,9 @@ h2 {
         grid-column: 2;
         grid-row: 2;
         width: 50vw;
+        max-width: 1000px;
         height: 30vw;
+        max-height: 600px;
         overflow: hidden;
         position: relative;
         margin-top: 30px;
@@ -1633,7 +1634,7 @@ h2 {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 2;
         height: 100vh;
-        min-height: 45vw;
+        /* min-height: 45vw; */
     }
 
     .storyImgWrap {
@@ -1667,7 +1668,7 @@ h2 {
 
     .storyText {
         color: #241614;
-        font-size: 1.25vw;
+        font-size: min(1.25vw, 2vh);
         font-weight: 200;
         width: 80%;
         margin-left: 50px;
@@ -1701,7 +1702,7 @@ h2 {
 
     .offerHead h2 {
         text-align: left;
-        font-size: 4vw;
+        font-size: min(4vw, 6vh);
         margin-top: -35px;
         font-weight: 500;
     }
@@ -1710,7 +1711,7 @@ h2 {
         color: #beba9b;
         margin-top: -5%;
         text-align: left;
-        font-size: 1.2vw;
+        font-size: min(1.25vw, 2vh);
         font-weight: 200;
     }
 
@@ -1834,8 +1835,8 @@ h2 {
         height: 30vw;
         overflow: hidden;
         position: relative;
-        max-width: 450px;
-        max-height: 450px;
+        max-width: 40vh;
+        max-height: 40vh;
     }
 
     .offerImage {

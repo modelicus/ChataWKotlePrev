@@ -35,10 +35,12 @@ h2 {
 
 #bgImage {
     position: fixed;
-    z-index: -10;
+    z-index: -1;
     width: 100lvw;
     height: 100lvh;
-    bottom: 0px;
+    transform: translateZ(0);
+    will-change: transform;
+    pointer-events: none;
 }
 
 .wrap {

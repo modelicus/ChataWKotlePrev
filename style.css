@@ -611,7 +611,8 @@ h2 {
     } */
 
     .storyImage {
-        height: 100%;
+        height: 100lvh;
+        width: auto;
         position: relative;
         object-fit: cover;
         /* display: none; */

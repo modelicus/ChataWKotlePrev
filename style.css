@@ -215,12 +215,12 @@ h2 {
     .story {
         /* background-color: #beba9b; */
         display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto 1fr 1fr;
+        grid-template-columns: 1;
+        grid-template-rows: auto auto;
     }
 
     .storyImgWindow {
-        height: 50vw;
+        height: 100vw;
         overflow: hidden;
         position: relative;
         grid-column: 1;
@@ -246,11 +246,12 @@ h2 {
         position: relative;
         object-fit: cover;
         /* display: none; */
+        bottom: 0px;
     }
 
     .storyTextWrap {
         grid-column: 1;
-        grid-row: 1/3;
+        grid-row: 1;
         width: 100%;
         height: 100%;
         place-items: center;
@@ -585,11 +586,11 @@ h2 {
         /* background-color: #beba9b; */
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: auto 1fr 1fr;
+        grid-template-rows: auto auto;
     }
 
     .storyImgWindow {
-        height: 50vw;
+        height: 100vw;
         overflow: hidden;
         position: relative;
         grid-column: 1;

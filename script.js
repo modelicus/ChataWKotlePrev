@@ -52,7 +52,7 @@ gsap.to(".aboutImage", {
     }
 });
 
-const bg = document.querySelector('#bgImage');
+const bg = document.querySelector('.bgImage');
 
 if (window.visualViewport) {
     const update = () => {

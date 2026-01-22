@@ -37,15 +37,11 @@ h2 {
 
 #bgImage {
     position: fixed;
-    left: 50%;
-    top: 50%;
-
+    inset: 0;
     width: 100vw;
     height: 100vh;
 
-    transform: translate(-50%, -50%);
     will-change: transform;
-
     pointer-events: none;
     z-index: -1;
 }

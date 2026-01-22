@@ -38,6 +38,7 @@ h2 {
     z-index: -10;
     width: 100lvw;
     height: 100lvh;
+    bottom: 0px;
 }
 
 .wrap {

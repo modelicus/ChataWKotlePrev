@@ -52,19 +52,6 @@ gsap.to(".aboutImage", {
     }
 });
 
-const bg = document.querySelector('.bgImage');
-
-if (window.visualViewport) {
-    const update = () => {
-        const offset = window.visualViewport.offsetTop;
-        bg.style.transform = `translateY(${offset}px)`;
-    };
-
-    window.visualViewport.addEventListener('scroll', update);
-    window.visualViewport.addEventListener('resize', update);
-    update();
-}
-
 
 gsap.to(".offerImage", {
     y: "20%",

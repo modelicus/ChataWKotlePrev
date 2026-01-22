@@ -13,7 +13,7 @@ body {
     margin: 0;
     font-family: "Lexend Deca", sans-serif;
     font-weight: 600;
-    background: #241614;
+    /* background: #241614; */
     line-height: 1.75;
     height: 100%;
     overscroll-behavior: none;
@@ -33,6 +33,17 @@ h2 {
     font-weight: 400;
 }
 
+#bgImage {
+    position: fixed;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+}
+
+.wrap {
+    background: #241614;
+}
+
 .logo img {
     width: 100%;
     height: 100%;
@@ -45,6 +56,7 @@ h2 {
     height: 100vh;
     width: 100%;
     overflow: hidden;
+    background: #241614;
 }
 
 .hero-mask {
@@ -98,7 +110,6 @@ h2 {
 
 #videoContainer {
     height: 200vh;
-    margin-top: 100px;
 }
 
 #video-background {
@@ -150,8 +161,8 @@ h2 {
         margin-right: auto;
         height: auto;
         background: #241614;
-        margin-top: 50px;
-        margin-bottom: 200px;
+        padding-top: 50px;
+        padding-bottom: 200px;
         max-width: 1800px;
     }
 
@@ -202,10 +213,18 @@ h2 {
     }
 
     .story {
-        background-color: #beba9b;
+        /* background-color: #beba9b; */
         display: grid;
         grid-template-columns: auto;
         grid-template-rows: auto 1fr 1fr;
+    }
+
+    .storyImgWindow {
+        height: 50vw;
+        overflow: hidden;
+        position: relative;
+        grid-column: 1;
+        grid-row: 2;
     }
 
     .storyImgWrap {
@@ -214,31 +233,28 @@ h2 {
         position: relative;
         grid-column: 1;
         grid-row: 3;
-        background-image: url("korytarz.jpg");
+        /* background-image: url("korytarz.jpg");
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        background-repeat: no-repeat; */
         bottom: 0px;
-    }
-
-    :root[style*="--is-ios: 1"] .storyImgWrap {
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-        grid-column: 1;
-        grid-row: 3;
-        background-image: url("korytarz.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
     }
 
     .storyImage {
         height: 100%;
         position: relative;
         object-fit: cover;
-        display: none;
+        /* display: none; */
+    }
+
+    .storyTextWrap {
+        grid-column: 1;
+        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+        place-items: center;
+        background-color: #beba9b;
     }
 
     .storyHead {
@@ -278,8 +294,8 @@ h2 {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 150px;
-        margin-bottom: 100px;
+        padding-top: 150px;
+        padding-bottom: 100px;
         height: auto;
         background: #241614;
     }
@@ -445,7 +461,7 @@ h2 {
 
     #videoContainer {
         height: 102vh;
-        margin-top: 100px;
+
     }
 
 
@@ -515,8 +531,8 @@ h2 {
         margin-right: auto;
         height: auto;
         background: #241614;
-        margin-top: 50px;
-        margin-bottom: 250px;
+        padding-top: 50px;
+        padding-bottom: 250px;
         max-width: 1800px;
     }
 
@@ -566,13 +582,21 @@ h2 {
     }
 
     .story {
-        background-color: #beba9b;
+        /* background-color: #beba9b; */
         display: grid;
         grid-template-columns: auto;
         grid-template-rows: auto 1fr 1fr;
     }
 
-    .storyImgWrap {
+    .storyImgWindow {
+        height: 50vw;
+        overflow: hidden;
+        position: relative;
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    /* .storyImgWrap {
         height: 100%;
         overflow: hidden;
         position: relative;
@@ -583,25 +607,22 @@ h2 {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-    }
-
-    :root[style*="--is-ios: 1"] .storyImgWrap {
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-        grid-column: 1;
-        grid-row: 3;
-        background-image: url("korytarz.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+    } */
 
     .storyImage {
         height: 100%;
         position: relative;
         object-fit: cover;
-        display: none;
+        /* display: none; */
+    }
+
+    .storyTextWrap {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: 100%;
+        align-self: center;
+        background-color: #beba9b;
     }
 
     .storyHead {
@@ -640,8 +661,8 @@ h2 {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 150px;
-        margin-bottom: 100px;
+        padding-top: 150px;
+        padding-bottom: 100px;
         height: auto;
         background: #241614;
     }
@@ -810,7 +831,7 @@ h2 {
 
     #videoContainer {
         height: 100vh;
-        margin-top: 100px;
+
     }
 
     #invite {
@@ -879,8 +900,8 @@ h2 {
         margin-right: auto;
         height: auto;
         background: #241614;
-        margin-top: 50px;
-        margin-bottom: 300px;
+        padding-top: 50px;
+        padding-bottom: 300px;
         max-width: 1800px;
     }
 
@@ -932,42 +953,34 @@ h2 {
     }
 
     .story {
-        background-color: #beba9b;
+        /* background-color: #beba9b; */
         display: grid;
         grid-template-columns: auto;
         grid-template-rows: auto 1fr 1fr;
     }
 
-    .storyImgWrap {
-        height: 100%;
+    .storyImgWindow {
+        height: 50vw;
         overflow: hidden;
         position: relative;
         grid-column: 1;
-        grid-row: 3;
-        background-image: url("korytarz.jpg");
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    :root[style*="--is-ios: 1"] .storyImgWrap {
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-        grid-column: 1;
-        grid-row: 3;
-        background-image: url("korytarz.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        grid-row: 2;
     }
 
     .storyImage {
         height: 100%;
         position: relative;
         object-fit: cover;
-        display: none;
+        /* display: none; */
+    }
+
+    .storyTextWrap {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: 100%;
+        align-self: center;
+        background-color: #beba9b;
     }
 
     .storyHead {
@@ -1002,8 +1015,8 @@ h2 {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 200px;
-        margin-bottom: 300px;
+        padding-top: 200px;
+        padding-bottom: 300px;
         height: auto;
         background: #241614;
         max-width: 1800px;
@@ -1234,8 +1247,8 @@ h2 {
         margin-right: auto;
         height: auto;
         background: #241614;
-        margin-top: 50px;
-        margin-bottom: 300px;
+        padding-top: 50px;
+        padding-bottom: 300px;
         max-width: 1800px;
     }
 
@@ -1281,48 +1294,40 @@ h2 {
     }
 
     .story {
-        background-color: #beba9b;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 2;
         height: 100vh;
-        min-height: 45vw;
+        /* min-height: 45vw; */
     }
 
-    .storyImgWrap {
+    .storyImgWindow {
         height: 100%;
         overflow: hidden;
         position: relative;
         grid-column: 1;
         grid-row: 1/3;
-        background-image: url("korytarz.jpg");
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    :root[style*="--is-ios: 1"] .storyImgWrap {
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-        grid-column: 1;
-        grid-row: 3;
-        background-image: url("korytarz.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
     }
 
     .storyImage {
+        width: 50vw;
         height: 100%;
         position: relative;
         object-fit: cover;
-        display: none;
+    }
+
+    .storyTextWrap {
+        grid-column: 2;
+        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
+        align-self: center;
+        background-color: #beba9b;
     }
 
     .storyHead {
-        grid-column: 2;
         grid-row: 1;
         color: #241614;
         margin-left: 50px;
@@ -1331,13 +1336,12 @@ h2 {
     }
 
     .storyText {
+        grid-row: 2;
         color: #241614;
         font-size: 1.25vw;
         font-weight: 200;
         width: 80%;
         margin-left: 50px;
-        grid-column: 2;
-        grid-row: 2;
         align-self: start;
     }
 
@@ -1348,8 +1352,8 @@ h2 {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 200px;
-        margin-bottom: 300px;
+        padding-top: 200px;
+        padding-bottom: 300px;
         height: auto;
         background: #241614;
         max-width: 1800px;
@@ -1580,8 +1584,8 @@ h2 {
         margin-right: auto;
         height: auto;
         background: #241614;
-        margin-top: 50px;
-        margin-bottom: 300px;
+        padding-top: 50px;
+        padding-bottom: 300px;
         max-width: 1800px;
     }
 
@@ -1629,12 +1633,20 @@ h2 {
     }
 
     .story {
-        background-color: #beba9b;
+        /* background-color: #beba9b; */
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 2;
+        grid-template-rows: 1;
         height: 100vh;
         /* min-height: 45vw; */
+    }
+
+    .storyImgWindow {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        grid-column: 1;
+        grid-row: 1/3;
     }
 
     .storyImgWrap {
@@ -1651,14 +1663,23 @@ h2 {
     }
 
     .storyImage {
+        width: 50vw;
         height: 100%;
         position: relative;
         object-fit: cover;
-        display: none;
+    }
+
+    .storyTextWrap {
+        grid-column: 2;
+        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
+        background-color: #beba9b;
     }
 
     .storyHead {
-        grid-column: 2;
         grid-row: 1;
         color: #241614;
         margin-left: 50px;
@@ -1667,13 +1688,12 @@ h2 {
     }
 
     .storyText {
+        grid-row: 2;
         color: #241614;
         font-size: min(1.25vw, 2vh);
         font-weight: 200;
         width: 80%;
         margin-left: 50px;
-        grid-column: 2;
-        grid-row: 2;
         align-self: start;
     }
 
@@ -1684,8 +1704,8 @@ h2 {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 200px;
-        margin-bottom: 300px;
+        padding-top: 200px;
+        padding-bottom: 300px;
         height: auto;
         background: #241614;
         max-width: 1800px;

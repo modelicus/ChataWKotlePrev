@@ -1,10 +1,3 @@
-const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-document.documentElement.style.setProperty("--is-ios", isIOS ? 1 : 0);
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const heroMask = document.querySelector('.hero-mask');
 

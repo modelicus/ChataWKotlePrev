@@ -140,14 +140,14 @@ h2 {
 
     .logo {
         position: absolute;
-        width: 80px;
+        width: 100px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
         background-color: rgba(190, 186, 155, 0.50);
         padding: 10px;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero {
@@ -157,13 +157,14 @@ h2 {
         top: 50vh;
         background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero__inner span {
         padding: 0.1rem;
         font-size: 2rem;
         font-weight: 500;
+        color: #241614;
     }
 
     .aboutWrapper {
@@ -358,6 +359,7 @@ h2 {
     .offerSVG {
         width: 50px;
         height: auto;
+        margin-bottom: 20px;
     }
 
     .offerIcon1 {
@@ -533,14 +535,14 @@ h2 {
 
     .logo {
         position: absolute;
-        width: 100px;
+        width: 120px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
         background-color: rgba(190, 186, 155, 0.50);
         padding: 10px;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero {
@@ -548,14 +550,16 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 50vh;
+        z-index: 3;
         background-color: rgba(190, 186, 155, 0.50);
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero__inner span {
         padding: 0.1rem;
         font-size: 2.5rem;
         font-weight: 500;
+        color: #241614;
     }
 
     .aboutWrapper {
@@ -746,8 +750,9 @@ h2 {
     }
 
     .offerSVG {
-        width: 100px;
+        width: 80px;
         height: auto;
+        margin-bottom: 20px;
     }
 
     .offerIcon1 {
@@ -923,14 +928,14 @@ h2 {
 
     .logo {
         position: absolute;
-        width: 130px;
+        width: 150px;
         height: auto;
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
         background-color: rgba(190, 186, 155, 0.50);
         padding: 10px;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero {
@@ -940,13 +945,14 @@ h2 {
         top: 60vh;
         background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero__inner span {
         padding: 0.1rem;
         font-size: 4vw;
         font-weight: 500;
+        color: #241614;
     }
 
     .aboutWrapper {
@@ -1117,8 +1123,9 @@ h2 {
     }
 
     .offerSVG {
-        width: 100px;
+        width: 80px;
         height: auto;
+        margin-bottom: 20px;
     }
 
     .offerIcon1 {
@@ -1291,20 +1298,21 @@ h2 {
 
     .logo {
         position: absolute;
-        width: 12vw;
+        width: max(150px, 12vw);
         height: auto;
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
         background-color: rgba(190, 186, 155, 0.50);
         padding: 10px;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero__inner span {
         padding: 0.1rem;
         font-size: 4vw;
         font-weight: 500;
+        color: #241614;
     }
 
     .marqueehero {
@@ -1314,7 +1322,7 @@ h2 {
         top: 70vh;
         background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .aboutWrapper {
@@ -1476,8 +1484,9 @@ h2 {
     }
 
     .offerSVG {
-        width: 100px;
+        width: 80px;
         height: auto;
+        margin-bottom: 20px;
     }
 
     .offerIcon1 {
@@ -1657,7 +1666,7 @@ h2 {
         margin-left: 13vw;
         background-color: rgba(190, 186, 155, 0.50);
         padding: 10px;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero {
@@ -1667,13 +1676,14 @@ h2 {
         top: 70vh;
         background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .marqueehero__inner span {
         padding: 0.1rem;
         font-size: 4vw;
         font-weight: 500;
+        color: #241614;
     }
 
     .aboutWrapper {
@@ -1853,6 +1863,7 @@ h2 {
     .offerSVG {
         width: 100px;
         height: auto;
+        margin-bottom: 20px;
     }
 
     .offerIcon1 {

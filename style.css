@@ -90,14 +90,6 @@ h2 {
     object-position: center;
 }
 
-.marqueehero {
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    top: 70vh;
-    background-color: rgba(182, 170, 61, 0.55);
-    z-index: 3;
-}
 
 .marqueehero__inner {
     display: inline-flex;
@@ -143,6 +135,14 @@ h2 {
 
 @media only screen and (max-width: 575px) and (orientation: portrait) {
 
+    .hero {
+        position: relative;
+        height: 70vh;
+        width: 100%;
+        overflow: hidden;
+        background: #241614;
+    }
+
     .logo {
         position: absolute;
         width: 80px;
@@ -150,6 +150,15 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+    }
+
+    .marqueehero {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        top: 50vh;
+        background-color: rgba(182, 170, 61, 0.55);
+        z-index: 3;
     }
 
     .marqueehero__inner span {
@@ -515,6 +524,14 @@ h2 {
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 
+    .hero {
+        position: relative;
+        height: 70vh;
+        width: 100%;
+        overflow: hidden;
+        background: #241614;
+    }
+
     .logo {
         position: absolute;
         width: 100px;
@@ -522,6 +539,15 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+    }
+
+    .marqueehero {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        top: 50vh;
+        background-color: rgba(182, 170, 61, 0.55);
+        z-index: 3;
     }
 
     .marqueehero__inner span {
@@ -885,6 +911,14 @@ h2 {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
+    .hero {
+        position: relative;
+        height: 80vh;
+        width: 100%;
+        overflow: hidden;
+        background: #241614;
+    }
+
     .logo {
         position: absolute;
         width: 130px;
@@ -892,6 +926,15 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+    }
+
+    .marqueehero {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        top: 60vh;
+        background-color: rgba(182, 170, 61, 0.55);
+        z-index: 3;
     }
 
     .marqueehero__inner span {
@@ -1247,6 +1290,15 @@ h2 {
         font-weight: 500;
     }
 
+    .marqueehero {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        top: 70vh;
+        background-color: rgba(182, 170, 61, 0.55);
+        z-index: 3;
+    }
+
     .aboutWrapper {
         display: grid;
         grid-template-rows: auto auto;
@@ -1577,6 +1629,15 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 13vw;
+    }
+
+    .marqueehero {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        top: 70vh;
+        background-color: rgba(182, 170, 61, 0.55);
+        z-index: 3;
     }
 
     .marqueehero__inner span {

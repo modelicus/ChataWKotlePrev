@@ -51,10 +51,11 @@ h2 {
 }
 
 .logo img {
-    width: 80%;
-    height: 80%;
+    width: 75%;
+    height: 75%;
     object-fit: contain;
     display: block;
+    margin: auto;
 }
 
 
@@ -144,6 +145,9 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+        background-color: rgba(190, 186, 155, 0.50);
+        padding: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero {
@@ -151,8 +155,9 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 50vh;
-        background-color: rgba(182, 170, 61, 0.55);
+        background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero__inner span {
@@ -533,6 +538,9 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+        background-color: rgba(190, 186, 155, 0.50);
+        padding: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero {
@@ -540,8 +548,8 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 50vh;
-        background-color: rgba(182, 170, 61, 0.55);
-        z-index: 3;
+        background-color: rgba(190, 186, 155, 0.50);
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero__inner span {
@@ -920,6 +928,9 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+        background-color: rgba(190, 186, 155, 0.50);
+        padding: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero {
@@ -927,8 +938,9 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 60vh;
-        background-color: rgba(182, 170, 61, 0.55);
+        background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero__inner span {
@@ -1284,6 +1296,9 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 10vw;
+        background-color: rgba(190, 186, 155, 0.50);
+        padding: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero__inner span {
@@ -1297,8 +1312,9 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 70vh;
-        background-color: rgba(182, 170, 61, 0.55);
+        background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
+        backdrop-filter: blur(5px);
     }
 
     .aboutWrapper {
@@ -1639,6 +1655,9 @@ h2 {
         z-index: 2;
         margin-top: 25px;
         margin-left: 13vw;
+        background-color: rgba(190, 186, 155, 0.50);
+        padding: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero {
@@ -1646,8 +1665,9 @@ h2 {
         white-space: nowrap;
         position: relative;
         top: 70vh;
-        background-color: rgba(182, 170, 61, 0.55);
+        background-color: rgba(190, 186, 155, 0.50);
         z-index: 3;
+        backdrop-filter: blur(5px);
     }
 
     .marqueehero__inner span {

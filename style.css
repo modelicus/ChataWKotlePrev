@@ -51,8 +51,8 @@ h2 {
 }
 
 .logo img {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
     display: block;
 }
@@ -1576,7 +1576,7 @@ h2 {
         height: auto;
         z-index: 2;
         margin-top: 25px;
-        margin-left: 10vw;
+        margin-left: 13vw;
     }
 
     .marqueehero__inner span {
